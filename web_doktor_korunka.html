@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doktor Korunka | Peníze, které najdete na zemi</title>
+    <meta name="description" content="Praktický průvodce vyjednáváním o platu, právy zaměstnance v ČR a chytrým šetřením. Řekněte si v práci o to, co si zasloužíte.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            950: '#022c22',
+                        },
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom subtle animations and gradients */
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(16, 185, 129, 0.12) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .book-shadow {
+            box-shadow: -15px 20px 35px rgba(0, 0, 0, 0.35), inset 4px 0 8px rgba(255, 255, 255, 0.2);
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-emerald-600 selection:text-white">
+
+    <!-- STICKY NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center text-amber-300 shadow-md shadow-emerald-600/20 group-hover:scale-105 transition-transform">
+                    <i data-lucide="coins" class="w-6 h-6"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-extrabold tracking-tight text-slate-900 block leading-none">Doktor <span class="text-emerald-600">Korunka</span></span>
+                    <span class="text-xs font-medium text-slate-500">doktorkorunka.cz</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                <a href="#proc-utikaji" class="hover:text-emerald-600 transition-colors">Kde leží peníze</a>
+                <a href="#tahak" class="hover:text-emerald-600 transition-colors">Tahák zdarma</a>
+                <a href="#ebook" class="hover:text-emerald-600 transition-colors flex items-center gap-1.5">
+                    <span>eBook</span>
+                    <span class="px-2 py-0.5 text-[11px] font-bold bg-amber-100 text-amber-800 rounded-full">349 Kč</span>
+                </a>
+                <a href="#o-doktorovi" class="hover:text-emerald-600 transition-colors">Kdo je Doktor?</a>
+                <a href="#komunita" class="hover:text-emerald-600 transition-colors">Sociální sítě</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:flex items-center gap-3">
+                <a href="#tahak" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/25 hover:shadow-emerald-600/40 transition-all flex items-center gap-2">
+                    <span>Chci vyšší plat</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2.5 rounded-xl text-slate-700 hover:bg-slate-100 focus:outline-none" aria-label="Menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#proc-utikaji" class="block py-2 px-3 rounded-lg font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kde leží peníze</a>
+            <a href="#tahak" class="block py-2 px-3 rounded-lg font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Tahák zdarma</a>
+            <a href="#ebook" class="block py-2 px-3 rounded-lg font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">eBook: Průvodce vyjednáváním (349 Kč)</a>
+            <a href="#o-doktorovi" class="block py-2 px-3 rounded-lg font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Kdo je Doktor Korunka?</a>
+            <a href="#komunita" class="block py-2 px-3 rounded-lg font-semibold text-slate-700 hover:bg-emerald-50 hover:text-emerald-700">Sociální sítě & Herohero</a>
+            <div class="pt-2">
+                <a href="#tahak" class="w-full py-3 rounded-xl bg-emerald-600 text-white font-bold text-center block shadow-md">
+                    Stáhnout tahák zdarma
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden pt-10 pb-20 md:pt-16 md:pb-28 bg-grid-pattern">
+        <!-- Decorative blobs -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-emerald-400/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/3 -right-24 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Left Column: Copy & CTAs -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100/80 border border-emerald-200 text-emerald-900 text-xs sm:text-sm font-bold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                        <span>Váš spojenec v kanceláři i v rodinném rozpočtu</span>
+                    </div>
+
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.12]">
+                        Peníze, které <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-700 to-amber-600">najdete na zemi.</span>
+                    </h1>
+
+                    <p class="text-lg sm:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Většina zaměstnanců v Česku nechává každý měsíc na stole tisíce korun jen proto, že si o ně neumí šéfovi říct nebo nezná svá práva. <strong>Pojďme je společně zvednout – s humorem, klidem a věcnými argumenty.</strong>
+                    </p>
+
+                    <!-- Dual CTA -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#tahak" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base shadow-xl shadow-emerald-600/25 hover:shadow-emerald-600/40 hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2.5">
+                            <i data-lucide="file-check-2" class="w-5 h-5"></i>
+                            <span>Stáhnout tahák zdarma</span>
+                        </a>
+                        <a href="#ebook" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white hover:bg-amber-50/60 text-slate-800 border-2 border-slate-200 hover:border-amber-400 font-bold text-base transition-all flex items-center justify-center gap-2.5">
+                            <i data-lucide="book-open" class="w-5 h-5 text-amber-500"></i>
+                            <span>eBook: Jak si říct o víc (349 Kč)</span>
+                        </a>
+                    </div>
+
+                    <!-- Mini Trust Signals -->
+                    <div class="pt-4 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs sm:text-sm font-medium text-slate-500">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
+                            <span>100% české pracovní prostředí</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
+                            <span>Bez suché právničiny</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
+                            <span>Okamžitě použitelné v praxi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Avatar Visual & Witty Bubble -->
+                <div class="lg:col-span-5">
+                    <div class="relative mx-auto max-w-md">
+                        <!-- Speech Bubble -->
+                        <div class="relative z-20 mb-4 bg-white p-4 sm:p-5 rounded-2xl shadow-xl border border-slate-200/80 animate-float">
+                            <div class="flex items-start gap-3">
+                                <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center shrink-0 mt-0.5">
+                                    <i data-lucide="message-square-quote" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold uppercase tracking-wider text-emerald-700 mb-0.5">Rada Doktora Korunky #1</p>
+                                    <p class="text-sm sm:text-base font-semibold text-slate-800 italic">
+                                        „Šéf říká, že v rozpočtu nejsou peníze? Pojďme se podívat do kolonky pro nové zaměstnance, tam se většinou schovávají...“
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Avatar Card -->
+                        <div class="relative bg-gradient-to-b from-emerald-900 to-emerald-950 rounded-3xl p-6 sm:p-8 text-white shadow-2xl border border-emerald-800 overflow-hidden">
+                            <div class="absolute top-0 right-0 w-48 h-48 bg-amber-400/10 rounded-full blur-2xl"></div>
+                            
+                            <div class="flex flex-col items-center text-center space-y-5 relative z-10">
+                                <!-- Avatar Illustration / Placeholder -->
+                                <div class="relative">
+                                    <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-tr from-amber-400 via-amber-300 to-emerald-400 p-1 shadow-xl">
+                                        <div class="w-full h-full bg-emerald-950 rounded-[20px] flex flex-col items-center justify-center relative overflow-hidden">
+                                            <!-- Stylized Character SVG Icon -->
+                                            <svg class="w-24 h-24 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M12 2l2.4 4.8L20 7.6l-4 3.9.9 5.5-4.9-2.6-4.9 2.6.9-5.5-4-3.9 5.6-.8L12 2z" fill="currentColor" fill-opacity="0.15"/>
+                                                <circle cx="12" cy="11" r="4" />
+                                                <path d="M6 21v-1a6 6 0 0 1 12 0v1" />
+                                            </svg>
+                                            <span class="absolute bottom-1.5 text-[10px] font-bold uppercase tracking-widest bg-emerald-800/90 text-emerald-200 px-2.5 py-0.5 rounded-full">
+                                                Dr. Korunka
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="absolute -bottom-2 -right-2 bg-amber-400 text-slate-950 w-10 h-10 rounded-xl flex items-center justify-center font-extrabold shadow-lg">
+                                        Kč
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h2 class="text-2xl font-extrabold text-white">MUDr. přes vaši výplatnici</h2>
+                                    <p class="text-emerald-200/90 text-sm mt-1">
+                                        Šetřím tam, kde to nedává smysl utrácet, a v práci vyjednávám maximum – abych pak mohl s klidem utrácet za to, co baví moji ženu.
+                                    </p>
+                                </div>
+
+                                <!-- Quick Stats Grid -->
+                                <div class="grid grid-cols-2 gap-3 w-full pt-2">
+                                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-3.5 border border-white/10 text-left">
+                                        <span class="text-amber-400 text-xl sm:text-2xl font-extrabold block">+3 až 10 tis.</span>
+                                        <span class="text-xs text-emerald-100">běžný prostor pro navýšení mzdy</span>
+                                    </div>
+                                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-3.5 border border-white/10 text-left">
+                                        <span class="text-amber-400 text-xl sm:text-2xl font-extrabold block">15 minut</span>
+                                        <span class="text-xs text-emerald-100">rozhovor, který změní váš rok</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE SALARY LOSS CALCULATOR + 3 PILLARS -->
+    <section id="proc-utikaji" class="py-20 bg-white border-y border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-emerald-600 font-bold text-sm uppercase tracking-wider">Diagnostika vaší peněženky</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">
+                    Proč vám každý měsíc utíkají peníze mezi prsty?
+                </h2>
+                <p class="text-slate-600 mt-4 text-lg">
+                    Ve škole nás učili láčkovce a rovnice, ale nikdo nám neřekl, jak funguje mzdové vyjednávání v české firmě. Tady jsou 3 místa, kde nejčastěji necháváte peníze ležet na zemi:
+                </p>
+            </div>
+
+            <!-- 3 Pillars Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Pillar 1 -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200/80 hover:border-emerald-500/50 hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="trending-up" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">1. Vyjednávání se šéfem</h3>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Čekáte, že si šéf sám všimne, jak dřete, a přidá vám? Všimne si – a přidá vám práci. Ukážu vám, jak si říct o víc peněz věcně, bez pocitu viny a bez klepání hlasu.
+                    </p>
+                    <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">Průměrný zisk: +4 500 Kč / měs.</span>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200/80 hover:border-emerald-500/50 hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="scale" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">2. Práva zaměstnance v ČR</h3>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Co vám HR oddělení samo od sebe neřekne? Od proplácení přesčasů, přes překážky v práci až po daňově výhodné benefity, které firmu skoro nic nestojí.
+                    </p>
+                    <span class="text-xs font-bold text-amber-800 bg-amber-100 px-3 py-1 rounded-full">Ochrana vašeho času i peněz</span>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200/80 hover:border-emerald-500/50 hover:shadow-xl transition-all group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="piggy-bank" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">3. Chytrá domácí ekonomika</h3>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Šetřit neznamená jíst suché rohlíky. Znamená to neplatit bankám, operátorům a pojišťovnám za vzduch, aby vám zbylo na to, co dělá radost vám (a vaší ženě).
+                    </p>
+                    <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">Průměrná úspora: 2 000 Kč / měs.</span>
+                </div>
+            </div>
+
+            <!-- Interactive Mini-Calculator -->
+            <div class="bg-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-xl">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-4">
+                        <div class="inline-flex items-center gap-2 text-amber-400 text-sm font-bold">
+                            <i data-lucide="calculator" class="w-4 h-4"></i>
+                            <span>Rychlá kalkulačka odloženého rozhovoru</span>
+                        </div>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold">
+                            Kolik vás stojí každé „zeptám se až příští rok“?
+                        </h3>
+                        <p class="text-slate-300 text-sm sm:text-base">
+                            Posuňte posuvníkem a podívejte se, o kolik peněz přicházíte, když odkládáte 15minutový rozhovor se šéfem.
+                        </p>
+                        
+                        <div class="pt-4 space-y-3">
+                            <div class="flex justify-between text-sm font-semibold">
+                                <span class="text-slate-300">O kolik si chcete říct měsíčně navíc:</span>
+                                <span id="calc-monthly-label" class="text-amber-400 font-bold text-lg">4 000 Kč</span>
+                            </div>
+                            <input id="calc-slider" type="range" min="1500" max="12000" step="500" value="4000" class="w-full h-2.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-500">
+                            <div class="flex justify-between text-xs text-slate-400">
+                                <span>1 500 Kč</span>
+                                <span>5 000 Kč</span>
+                                <span>12 000 Kč</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-slate-800/90 border border-slate-700 rounded-2xl p-6 text-center space-y-4">
+                        <div>
+                            <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Za 1 rok čekání necháte na zemi:</span>
+                            <div id="calc-yearly" class="text-3xl sm:text-4xl font-extrabold text-amber-400 mt-1">48 000 Kč</div>
+                        </div>
+                        <div class="border-t border-slate-700 pt-3">
+                            <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Za 3 roky v práci to dělá:</span>
+                            <div id="calc-three-years" class="text-2xl font-bold text-emerald-400 mt-0.5">144 000 Kč</div>
+                        </div>
+                        <p id="calc-wife-comment" class="text-xs text-slate-300 italic bg-slate-900/70 p-3 rounded-xl">
+                            „Za 48 000 Kč už je hodně pěkná dovolená, kabelka nebo klidnější spaní. Nenechte je šéfovi jen proto, že je vám trapné zaklepat.“
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- LEAD MAGNET SECTION (TAHÁK ZDARMA) -->
+    <section id="tahak" class="py-20 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-br from-emerald-900 via-emerald-950 to-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl border border-emerald-800 relative overflow-hidden">
+                <!-- Background Accent -->
+                <div class="absolute -bottom-24 -right-24 w-80 h-80 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
+                    <!-- Left Copy -->
+                    <div class="lg:col-span-7 space-y-5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-400/20 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
+                            <i data-lucide="gift" class="w-4 h-4"></i>
+                            <span>PDF Tahák ke stažení zdarma</span>
+                        </div>
+                        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight">
+                            5 vět, které šéfovi říct, když chcete přidat <span class="text-amber-400">(a co odpovědět, když řekne, že nejsou peníze)</span>
+                        </h2>
+                        <p class="text-emerald-100/90 text-base leading-relaxed">
+                            Přestaňte chodit kolem horké kaše. Stáhněte si 2stránkový praktický tahák, který si můžete přečíst 5 minut před schůzkou se šéfem.
+                        </p>
+                        <ul class="space-y-2.5 text-sm text-emerald-100">
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-5 h-5 text-amber-400 shrink-0"></i>
+                                <span>Přesná formulace, jak schůzku svolat, aby šéf nešel do obrany.</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-5 h-5 text-amber-400 shrink-0"></i>
+                                <span>Nejčastější chyba („zdražily mi energie“), kvůli které lidé odchází s prázdnou.</span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i data-lucide="check" class="w-5 h-5 text-amber-400 shrink-0"></i>
+                                <span>Okamžitá reakce na větu: „Teď je složitá doba, zkusíme to za půl roku.“</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Right Form -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-white text-slate-900 rounded-2xl p-6 sm:p-7 shadow-xl">
+                            <div id="lead-form-container">
+                                <h3 class="text-lg font-extrabold text-slate-900 mb-1">Kam vám mám tahák poslat?</h3>
+                                <p class="text-xs text-slate-500 mb-5">Během minuty ho máte v e-mailu. Žádný spam, jen čistá praxe od Doktora Korunky.</p>
+                                
+                                <form id="lead-form" class="space-y-4">
+                                    <div>
+                                        <label for="lead-name" class="block text-xs font-bold text-slate-700 uppercase mb-1">Vaše křestní jméno</label>
+                                        <input type="text" id="lead-name" required placeholder="Např. Jakub" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 outline-none text-sm font-medium">
+                                    </div>
+                                    <div>
+                                        <label for="lead-email" class="block text-xs font-bold text-slate-700 uppercase mb-1">Váš e-mail</label>
+                                        <input type="email" id="lead-email" required placeholder="vas@email.cz" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 focus:ring-2 focus:ring-emerald-600/20 outline-none text-sm font-medium">
+                                    </div>
+                                    <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold text-sm shadow-lg shadow-amber-500/25 transition-all flex items-center justify-center gap-2">
+                                        <span>Poslat tahák zdarma</span>
+                                        <i data-lucide="send" class="w-4 h-4"></i>
+                                    </button>
+                                    <p class="text-[11px] text-slate-400 text-center">
+                                        Odesláním souhlasíte se zasíláním praktických tipů Doktora Korunky. Odhlásit se můžete jedním klikem.
+                                    </p>
+                                </form>
+                            </div>
+
+                            <!-- Success State (Hidden by default) -->
+                            <div id="lead-success" class="hidden text-center py-4 space-y-4">
+                                <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                                    <i data-lucide="check-circle" class="w-8 h-8"></i>
+                                </div>
+                                <h4 class="text-xl font-extrabold text-slate-900">Paráda, <span id="user-name-display">příteli</span>!</h4>
+                                <p class="text-sm text-slate-600">
+                                    Tahák míří na váš e-mail. Rovnou si ale můžete přečíst <strong>Ukázkovou větu č. 1</strong> přímo tady:
+                                </p>
+                                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 text-left text-xs text-emerald-950 space-y-1.5">
+                                    <span class="font-bold block text-emerald-700">Místo: „Potřeboval bych přidat, všechno zdražilo...“</span>
+                                    <span class="font-semibold block">Řekněte: „Za poslední půlrok jsem převzal agendu X a ušetřil týmu Y hodin týdně. Rád bych dnes srovnal své ohodnocení s touto novou zodpovědností.“</span>
+                                </div>
+                                <a href="#ebook" class="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700 hover:text-emerald-800 pt-1">
+                                    <span>Chcete kompletní scénář schůzky? Mrkněte na eBook níže</span>
+                                    <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURED PRODUCT: EBOOK ZA 349 KČ -->
+    <section id="ebook" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+                
+                <!-- Left Column: 3D Book Mockup Card -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative group">
+                        <!-- Glow behind book -->
+                        <div class="absolute -inset-4 bg-gradient-to-tr from-emerald-500/20 to-amber-500/20 rounded-3xl blur-2xl"></div>
+                        
+                        <!-- Book Cover -->
+                        <div class="relative w-72 sm:w-80 bg-gradient-to-br from-emerald-900 via-emerald-950 to-slate-950 rounded-r-3xl rounded-l-md p-7 text-white book-shadow border-l-8 border-amber-400 flex flex-col justify-between min-h-[430px] transform group-hover:-translate-y-2 transition-transform duration-300">
+                            <div>
+                                <div class="flex items-center justify-between border-b border-emerald-800 pb-3 mb-5">
+                                    <span class="text-xs font-bold uppercase tracking-widest text-amber-400">Edice Doktor Korunka</span>
+                                    <span class="text-xs bg-emerald-800 text-emerald-200 px-2 py-0.5 rounded font-semibold">PDF + Šablony</span>
+                                </div>
+                                <h3 class="text-2xl font-extrabold leading-snug text-white">
+                                    Jak si u šéfa vyjednat o <span class="text-amber-400">3 000 až 10 000 Kč</span> měsíčně víc
+                                </h3>
+                                <p class="text-xs text-emerald-200/80 mt-3 leading-relaxed">
+                                    Praktický manuál pro české zaměstnance: Od přípravy neprůstřelných argumentů až po podpis nového mzdového výměru.
+                                </p>
+                            </div>
+
+                            <div class="my-6 flex justify-center">
+                                <div class="w-20 h-20 rounded-2xl bg-amber-400/15 border border-amber-400/40 flex items-center justify-center text-amber-400">
+                                    <i data-lucide="award" class="w-10 h-10"></i>
+                                </div>
+                            </div>
+
+                            <div class="border-t border-emerald-800/80 pt-3 flex items-center justify-between text-xs">
+                                <span class="font-bold text-white">Doktor Korunka</span>
+                                <span class="text-amber-400 font-bold">doktorkorunka.cz</span>
+                            </div>
+                        </div>
+
+                        <!-- Floating Price Badge -->
+                        <div class="absolute -bottom-5 -right-5 bg-amber-400 text-slate-950 px-5 py-3 rounded-2xl shadow-xl font-extrabold border-4 border-white">
+                            <span class="text-xs uppercase block leading-none text-slate-800">Cena průvodce</span>
+                            <span class="text-2xl">349 Kč</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: eBook Details & Conversion -->
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wider">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-amber-600"></i>
+                        <span>Kompletní vyjednávací manuál (eBook)</span>
+                    </div>
+
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight">
+                        Velký průvodce: Jak si u šéfa vyjednat o 3 000 až 10 000 Kč měsíčně víc
+                    </h2>
+
+                    <p class="text-slate-600 text-lg leading-relaxed">
+                        Žádná americká motivační vata. Tento eBook je napsaný pro realitu českých kanceláří, výrobních firem i korporátů. Krok za krokem vás provede od prvního zaklepání na dveře až po moment, kdy vám na účet cinkne vyšší výplata.
+                    </p>
+
+                    <!-- What's inside list -->
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Přesné scénáře rozhovoru (Slovo od slova)</h4>
+                                <p class="text-sm text-slate-600">Co říct v první minutě, jak položit částku na stůl a jak pracovat s tichem, aby šéf neřekl automatické „ne“.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Slovník šéfovských výmluv a jak je věcně odrazit</h4>
+                                <p class="text-sm text-slate-600">„Máme zmrazené rozpočty“, „Ostatní by chtěli taky“, „Uvidíme po novém roce“ – na každou větu dostanete klidnou a neprůstřelnou odpověď.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">Plán B: Když firma opravdu nemůže zvednout hrubou mzdu</h4>
+                                <p class="text-sm text-slate-600">Jak si vyjednat daňově zvýhodněné benefity, dny dovolené navíc, home office nebo příspěvky, které vám reálně ušetří tisíce měsíčně.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                                <i data-lucide="check" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900">BONUS: Checklist přípravy na 1 stránku</h4>
+                                <p class="text-sm text-slate-600">Vytisknete, vyplníte své 3 hlavní argumenty za 10 minut a jdete na schůzku s naprostým klidem.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price & Buy Box -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-5 bg-slate-50 p-6 rounded-2xl border border-slate-200">
+                        <div class="flex-1">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-3xl font-extrabold text-slate-900">349 Kč</span>
+                                <span class="text-sm text-slate-400 line-through">690 Kč</span>
+                                <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full">Zaváděcí cena</span>
+                            </div>
+                            <p class="text-xs text-slate-600 mt-1">
+                                Investice 349 Kč se vám vrátí už za <strong>první 2 dny</strong> v práci s novým platem.
+                            </p>
+                        </div>
+
+                        <button id="open-ebook-modal" class="px-8 py-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base shadow-xl shadow-emerald-600/25 hover:shadow-emerald-600/40 transition-all flex items-center justify-center gap-2 shrink-0">
+                            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                            <span>Koupit eBook za 349 Kč</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION (KDO JE DOKTOR KORUNKA) -->
+    <section id="o-doktorovi" class="py-20 bg-emerald-950 text-white relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-amber-400 font-bold text-sm uppercase tracking-wider">O projektu & filozofii</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold leading-tight">
+                        Kdo je Doktor Korunka? <br>
+                        <span class="text-amber-400">Chlapík, který šetří na hloupostech, aby mohl dělat radost své ženě.</span>
+                    </h2>
+                    <p class="text-emerald-100/90 text-lg leading-relaxed">
+                        Možná to znáte taky. Chodíte poctivě do práce, děláte přesčasy, ale když přijde řeč na peníze, radši mávnete rukou, abyste nevypadali chamtivě. Jenže mezitím zdraží nákupy, hypotéka i dovolená.
+                    </p>
+                    <p class="text-emerald-100/80 leading-relaxed">
+                        Moje životní filozofie je jednoduchá: <strong>Nechci šetřit na životě. Chci šetřit tam, kde ze mě korporáty a banky tahají peníze zbytečně – a v práci si vyjednat férové maximum.</strong> Proč? Abych pak mohl s naprostým klidem a úsměvem zaplatit to, co baví moji ženu a rodinu.
+                    </p>
+
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-5 space-y-2">
+                        <div class="flex items-center gap-2 text-amber-400 font-bold text-sm">
+                            <i data-lucide="info" class="w-4 h-4"></i>
+                            <span>Transparentně: Proč má Doktor Korunka digitální tvář?</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-emerald-100/80 leading-relaxed">
+                            Postava Doktora Korunky je moderní digitální průvodce (AI avatar), za kterým stojí reálné zkušenosti z českého byznysu, vyjednávání a osobních financí. Díky tomu můžu mluvit naprosto otevřeně o tricích šéfů a HR bez obav, že se v pondělí v kanceláři někdo urazí.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right Quote / Persona Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white text-slate-900 rounded-3xl p-8 shadow-2xl space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-2xl bg-emerald-600 text-amber-300 flex items-center justify-center font-extrabold text-xl shrink-0">
+                                DK
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-lg text-slate-900">3 přikázání Doktora Korunky</h3>
+                                <p class="text-xs text-slate-500">Pro klid v peněžence i doma</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 text-sm">
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <span class="font-extrabold text-emerald-700 block mb-1">1. Líná pusa = holé neštěstí</span>
+                                <span class="text-slate-600">Nikdo vám nedá to, co si zasloužíte. Dostanete jen to, co si dokážete vyjednat.</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <span class="font-extrabold text-emerald-700 block mb-1">2. Emoce nechte přede dveřmi</span>
+                                <span class="text-slate-600">Se šéfem se nevyjednává pláčem ani výhrůžkou, ale čísly, klidem a úsměvem.</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                                <span class="font-extrabold text-emerald-700 block mb-1">3. Šťastná žena = klidný život</span>
+                                <span class="text-slate-600">Každá stovka ušetřená na nesmyslných poplatcích chutná mnohem lépe na společné večeři.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SOCIAL HUB & HEROHERO TEASER -->
+    <section id="komunita" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-emerald-600 font-bold text-sm uppercase tracking-wider">Sledujte krátká videa</span>
+                <h2 class="text-3xl font-extrabold text-slate-900 mt-2">
+                    Ordinujeme každý týden na sítích
+                </h2>
+                <p class="text-slate-600 mt-3">
+                    Krátké 60vteřinové scénky z vyjednávání, překlady z „HR řeči do češtiny“ a rychlé tipy, kde najít peníze na zemi.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Instagram -->
+                <a href="#" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-emerald-500 hover:shadow-lg transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-pink-50 text-pink-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="instagram" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-extrabold text-lg text-slate-900">Instagram Reels</h3>
+                        <p class="text-sm text-slate-600 mt-1">Krátké scénky ze života zaměstnanců a rychlé finanční tipy.</p>
+                    </div>
+                    <span class="mt-5 inline-flex items-center gap-1 text-xs font-bold text-emerald-600">
+                        <span>@doktorkorunka</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+
+                <!-- TikTok -->
+                <a href="#" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-emerald-500 hover:shadow-lg transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-slate-100 text-slate-900 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="video" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-extrabold text-lg text-slate-900">TikTok</h3>
+                        <p class="text-sm text-slate-600 mt-1">Rychlé rozbory výplatních pásek, zákoníku práce a šéfovských triků.</p>
+                    </div>
+                    <span class="mt-5 inline-flex items-center gap-1 text-xs font-bold text-emerald-600">
+                        <span>Sledovat na TikToku</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+
+                <!-- YouTube Shorts -->
+                <a href="#" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-emerald-500 hover:shadow-lg transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="youtube" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-extrabold text-lg text-slate-900">YouTube Shorts</h3>
+                        <p class="text-sm text-slate-600 mt-1">Archiv nejlepších rad, jak ušetřit v domácnosti a vydělat v práci.</p>
+                    </div>
+                    <span class="mt-5 inline-flex items-center gap-1 text-xs font-bold text-emerald-600">
+                        <span>Odebírat kanál</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+
+                <!-- Herohero VIP -->
+                <a href="#ebook" class="bg-gradient-to-br from-amber-400 to-amber-500 p-6 rounded-3xl text-slate-950 shadow-lg hover:shadow-xl transition-all flex flex-col justify-between group">
+                    <div>
+                        <div class="w-12 h-12 rounded-2xl bg-slate-950 text-amber-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                            <i data-lucide="crown" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-[11px] font-extrabold uppercase tracking-wider bg-slate-950/15 px-2.5 py-0.5 rounded-full">Připravujeme</span>
+                        <h3 class="font-extrabold text-lg mt-2">VIP Ordinace (Herohero)</h3>
+                        <p class="text-sm text-slate-900/90 mt-1">Konkrétní vzory dodatků ke smlouvám, rozbory vašich situací a simulace pohovorů.</p>
+                    </div>
+                    <span class="mt-5 inline-flex items-center gap-1 text-xs font-extrabold text-slate-950">
+                        <span>Zatím začněte s eBookem</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER (DOPLŇTE SI VLASTNÍ ÚDAJE) -->
+    <footer class="bg-slate-950 text-slate-400 py-14 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Col 1: Brand -->
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-xl bg-emerald-600 flex items-center justify-center text-amber-300">
+                            <i data-lucide="coins" class="w-4 h-4"></i>
+                        </div>
+                        <span class="text-lg font-extrabold text-white">Doktor Korunka</span>
+                    </div>
+                    <p class="text-sm text-slate-400">
+                        Peníze, které najdete na zemi. Praktický průvodce vyjednáváním o platu a chytrými financemi.
+                    </p>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div class="space-y-2 text-sm">
+                    <h4 class="font-bold text-white uppercase tracking-wider text-xs mb-3">Rychlá navigace</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#tahak" class="hover:text-emerald-400 transition-colors">Tahák zdarma (5 vět pro šéfa)</a></li>
+                        <li><a href="#ebook" class="hover:text-emerald-400 transition-colors">eBook: Průvodce vyjednáváním (349 Kč)</a></li>
+                        <li><a href="#o-doktorovi" class="hover:text-emerald-400 transition-colors">Kdo je Doktor Korunka</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Provozovatel (PLACEHOLDERS PRO VÁS) -->
+                <div class="space-y-2 text-sm">
+                    <h4 class="font-bold text-white uppercase tracking-wider text-xs mb-3">Provozovatel & Kontakt</h4>
+                    <!-- ZDE SI DOPLŇTE SVÉ ÚDAJE -->
+                    <p class="text-slate-300 font-medium">[DOPLŇTE JMÉNO A PŘÍJMENÍ / NÁZEV]</p>
+                    <p>IČO: <span class="text-slate-300">[DOPLŇTE IČO]</span></p>
+                    <p>Sídlo: <span class="text-slate-300">[DOPLŇTE ADRESU SÍDLA]</span></p>
+                    <p>E-mail: <a href="mailto:info@doktorkorunka.cz" class="text-emerald-400 hover:underline">info@doktorkorunka.cz</a></p>
+                </div>
+
+            </div>
+
+            <!-- Legal Disclaimer -->
+            <div class="border-t border-slate-800/80 pt-8 text-xs text-slate-500 space-y-3 leading-relaxed">
+                <p>
+                    <strong>Právní upozornění (Disclaimer):</strong> Veškerý obsah na webu <em>doktorkorunka.cz</em>, v eBooku i na přidružených sociálních sítích slouží výhradně k edukativním účelům, motivaci a sdílení vyjednávací praxe. Nejedná se o poskytování právních služeb ve smyslu zákona č. 85/1996 Sb., o advokacii, ani o licencované finanční či investiční poradenství. Postava „Doktor Korunka“ je stylizovaný digitální průvodce (AI avatar).
+                </p>
+                <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-2">
+                    <p>&copy; <span id="current-year"></span> doktorkorunka.cz. Všechna práva vyhrazena.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="hover:text-slate-300">Obchodní podmínky (doplnit)</a>
+                        <a href="#" class="hover:text-slate-300">Ochrana osobních údajů (GDPR)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer >
+
+    <!-- CHECKOUT / EBOOK MODAL (349 KČ) -->
+    <div id="ebook-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative animate-fadeIn">
+            <button id="close-ebook-modal" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-600" aria-label="Zavřít">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+
+            <div id="modal-order-step">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold mb-3">
+                    <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                    <span>Okamžité doručení v PDF na váš e-mail</span>
+                </div>
+                <h3 class="text-2xl font-extrabold text-slate-900">
+                    Objednávka eBooku Doktora Korunky
+                </h3>
+                <p class="text-sm text-slate-600 mt-1">
+                    Velký průvodce: Jak si u šéfa vyjednat o 3 000 až 10 000 Kč měsíčně víc + 1stránkový checklist přípravy.
+                </p>
+
+                <!-- Summary Box -->
+                <div class="my-5 p-4 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between">
+                    <div>
+                        <span class="font-bold text-slate-900 block text-sm">Kompletní eBook + Šablony (PDF)</span>
+                        <span class="text-xs text-emerald-600 font-semibold">Zaváděcí cena (ušetříte 341 Kč)</span>
+                    </div>
+                    <span class="text-xl font-extrabold text-slate-900">349 Kč</span>
+                </div>
+
+                <!-- Order Form (Can be connected to SimpleShop / Stripe / Fapi link) -->
+                <form id="ebook-order-form" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Jméno a příjmení</label>
+                        <input type="text" required placeholder="Jan Novák" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1">E-mail pro doručení eBooku</label>
+                        <input type="email" id="order-email" required placeholder="jan.novak@email.cz" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-emerald-600 outline-none text-sm">
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-base shadow-lg shadow-emerald-600/25 transition-all flex items-center justify-center gap-2">
+                        <i data-lucide="lock" class="w-4 h-4"></i>
+                        <span>Přejít k platbě (349 Kč)</span>
+                    </button>
+                    <p class="text-[11px] text-slate-400 text-center">
+                        Tip pro provozovatele: Toto tlačítko lze přímo propojit s platební bránou (Stripe / SimpleShop / QR platba).
+                    </p>
+                </form>
+            </div>
+
+            <!-- Modal Confirmation Step -->
+            <div id="modal-success-step" class="hidden text-center py-6 space-y-4">
+                <div class="w-16 h-16 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center mx-auto">
+                    <i data-lucide="sparkles" class="w-8 h-8"></i>
+                </div>
+                <h4 class="text-2xl font-extrabold text-slate-900">Skvělé rozhodnutí!</h4>
+                <p class="text-sm text-slate-600">
+                    Platební brána se právě připravuje ke spuštění. Jakmile bude eBook nahrán v prodejním systému (např. SimpleShop nebo Stripe), zákazník bude z tohoto kroku rovnou přesměrován k platbě kartou / QR kódem.
+                </p>
+                <button id="close-success-btn" class="px-6 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-bold">
+                    Rozumím, zavřít okno
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Set dynamic year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Interactive Salary Loss Calculator
+        const slider = document.getElementById('calc-slider');
+        const monthlyLabel = document.getElementById('calc-monthly-label');
+        const yearlyDisplay = document.getElementById('calc-yearly');
+        const threeYearsDisplay = document.getElementById('calc-three-years');
+        const wifeComment = document.getElementById('calc-wife-comment');
+
+        function formatCZK(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " Kč";
+        }
+
+        slider.addEventListener('input', (e) => {
+            const monthly = parseInt(e.target.value, 10);
+            const yearly = monthly * 12;
+            const threeYears = yearly * 3;
+
+            monthlyLabel.textContent = formatCZK(monthly);
+            yearlyDisplay.textContent = formatCZK(yearly);
+            threeYearsDisplay.textContent = formatCZK(threeYears);
+
+            if (yearly <= 30000) {
+                wifeComment.textContent = `„Za ${formatCZK(yearly)} ročně už pořídíte parádní prodloužený víkend ve dvou nebo zaplatíte celé roční vyúčtování energií.“`;
+            } else if (yearly <= 72000) {
+                wifeComment.textContent = `„Za ${formatCZK(yearly)} už je hodně pěkná dovolená u moře, vysněný dárek pro ženu nebo solidní finanční polštář.“`;
+            } else {
+                wifeComment.textContent = `„Nechat v práci ležet ${formatCZK(yearly)} ročně? Za to už by vám manželka doma postavila malý pomník!“`;
+            }
+        });
+
+        // Lead Magnet Form Handling
+        const leadForm = document.getElementById('lead-form');
+        const leadFormContainer = document.getElementById('lead-form-container');
+        const leadSuccess = document.getElementById('lead-success');
+        const userNameDisplay = document.getElementById('user-name-display');
+
+        leadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameVal = document.getElementById('lead-name').value.trim();
+            if (nameVal) {
+                userNameDisplay.textContent = nameVal;
+            }
+            leadFormContainer.classList.add('hidden');
+            leadSuccess.classList.remove('hidden');
+        });
+
+        // eBook Modal Handling
+        const ebookModal = document.getElementById('ebook-modal');
+        const openModalBtn = document.getElementById('open-ebook-modal');
+        const closeModalBtn = document.getElementById('close-ebook-modal');
+        const closeSuccessBtn = document.getElementById('close-success-btn');
+        const ebookOrderForm = document.getElementById('ebook-order-form');
+        const modalOrderStep = document.getElementById('modal-order-step');
+        const modalSuccessStep = document.getElementById('modal-success-step');
+
+        function openModal() {
+            ebookModal.classList.remove('hidden');
+            ebookModal.classList.add('flex');
+        }
+
+        function closeModal() {
+            ebookModal.classList.add('hidden');
+            ebookModal.classList.remove('flex');
+            modalOrderStep.classList.remove('hidden');
+            modalSuccessStep.classList.add('hidden');
+        }
+
+        openModalBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        closeSuccessBtn.addEventListener('click', closeModal);
+
+        ebookModal.addEventListener('click', (e) => {
+            if (e.target === ebookModal) closeModal();
+        });
+
+        ebookOrderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            modalOrderStep.classList.add('hidden');
+            modalSuccessStep.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
